@@ -21,6 +21,8 @@ CPlayer::CPlayer()
 , FireCount(0)
 , mVj(0)
 , mJump(0)
+, mLife(3)
+, mMuteki(0)
 , mGameover(false)
 , mGameclear(false)
 {
@@ -34,6 +36,9 @@ void CPlayer::Update() {
 	}
 	if (mGameclear){
 		return;
+	}
+	if (mMuteki > 0){
+		mMuteki--;
 	}
 
 	//staticƒƒ\ƒbƒh‚Í‚Ç‚±‚©‚ç‚Å‚àŒÄ‚×‚é
@@ -115,6 +120,7 @@ void CPlayer::Render() {
 mAniCnt++;
 mAniCnt %= ANICNT;
 //	CRectangle::Render(Texture, 146 - 16, 146 + 16, 146 + 16, 146 - 16);
+if (mMuteki>=0)
 if (mAniCnt < ANICNT / 2){
 	if (mFx >= 0){
 		CRectangle::Render(Texture, 130, 162, 162, 130);
@@ -163,8 +169,13 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 	{
 		int mx, my;
 		if (CRectangle::Collision(ry, &mx, &my)) {
-			mGameover = true;
-
+			if (mLife <= 0){
+				mGameover = true;
+			}
+			else if (mMuteki <= 0){
+				mMuteki = 5 * 60;
+			}
+		
 		}
 
 	}
