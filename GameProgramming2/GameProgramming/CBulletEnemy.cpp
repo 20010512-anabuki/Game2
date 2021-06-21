@@ -12,6 +12,7 @@ extern int CountEnemy;
 CBulletEnemy::CBulletEnemy()
 : mFx(1.0f)
 , mFy(0.0f)
+, mLife(1)
 , mFireCount(60)
 {
 	mTag = EBULLETENEMY;
@@ -53,7 +54,7 @@ void CBulletEnemy::Update() {
 		EBullet->mEnabled = true;
 		EBullet->mTag = EENEMYBULLET;
 		}
-		mFireCount = 100;
+		mFireCount = 150;
 		}
 	mFy = -1;
 	x += mFx;
@@ -129,10 +130,15 @@ bool CBulletEnemy::Collision(CRectangle &r) {
 
 		case EPLAYERBULLET:
 			//プレイヤーの弾に当たると、無効にする
-			mEnabled = false;
-			Score += 300;
-			CountEnemy--;
-			break;
+			if (mLife <= 0){
+				mEnabled = false;
+				Score += 300;
+				CountEnemy--;
+				break;
+			}
+			else if (mLife > 0){
+				mLife -= 1;
+			}
 			//case EPLAYER:
 			//	mEnabled = false;
 			//	break;

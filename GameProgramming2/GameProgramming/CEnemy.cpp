@@ -12,6 +12,7 @@ extern int CountEnemy;
 CEnemy::CEnemy()
 : mFx(1.0f)
 , mFy(0.0f)
+, mLife(0)
 , mFireCount(60)
 {
 	mTag = EENEMY;
@@ -129,10 +130,16 @@ void CEnemy::Update() {
 
 				case EPLAYERBULLET:
 					//プレイヤーの弾に当たると、無効にする
-					mEnabled = false;
-					Score += 200;
-					CountEnemy--;
-					break;
+					if (mLife <= 0){
+						mEnabled = false;
+						Score += 200;
+						CountEnemy--;
+						break;
+					}
+					else if (mLife > 0){
+						mLife -= 1;
+					}
+
 					//case EPLAYER:
 					//	mEnabled = false;
 					//	break;

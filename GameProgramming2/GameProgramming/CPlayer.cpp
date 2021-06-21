@@ -21,7 +21,7 @@ CPlayer::CPlayer()
 , FireCount(0)
 , mVj(0)
 , mJump(0)
-, mLife(3)
+, mLife(2)
 , mMuteki(0)
 , mGameover(false)
 , mGameclear(false)
@@ -173,7 +173,8 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 				mGameover = true;
 			}
 			else if (mMuteki <= 0){
-				mMuteki = 5 * 60;
+				mMuteki = 3 * 60;
+				mLife -= 1;
 			}
 		
 		}
@@ -183,7 +184,13 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 	{
 		int mx, my;
 		if (CRectangle::Collision(ry, &mx, &my)) {
-			mGameover = true;
+			if (mLife <= 0){
+				mGameover = true;
+			}
+			else if (mMuteki <= 0){
+				mMuteki = 3 * 60;
+				mLife -= 1;
+			}
 
 		}
 
@@ -193,8 +200,13 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 	{
 		int mx, my;
 		if (CRectangle::Collision(ry, &mx, &my)) {
-			mGameover = true;
-
+			if (mLife <= 0){
+				mGameover = true;
+			}
+			else if (mMuteki <= 0){
+				mMuteki = 3 * 60;
+				mLife -= 1;
+			}
 		}
 
 	}
@@ -202,8 +214,13 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 	{
 		int mx, my;
 		if (CRectangle::Collision(ry, &mx, &my)) {
-			mGameover = true;
-
+			if (mLife <= 0){
+				mGameover = true;
+			}
+			else if (mMuteki <= 0){
+				mMuteki = 3 * 60;
+				mLife -= 1;
+			}
 		}
 
 	}

@@ -12,6 +12,7 @@ public:
 	int mFy; //Y²•ûŒü‚ÌˆÚ“® -1:‰º 0:ˆÚ“®‚µ‚È‚¢ 1:ã‚ÖˆÚ“®
 	int mFireCount;
 	int mAniCnt;
+	int mLife;
 	CBulletEnemy();
 	void Update();
 	bool Collision(CRectangle &r);
