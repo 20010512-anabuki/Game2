@@ -68,6 +68,12 @@ void CBullet::Collision(CRectangle *i, CRectangle *y) {
 				return;
 			}
 		}
+		if (i->mTag == EENEMYBULLET && y->mTag == EPLAYER) {
+			if (i->Collision(*y)) {
+				mEnabled = false;
+				return;
+			}
+		}
 		if (i->mTag == EPLAYERBULLET && y->mTag == EKEYBLOCK) {
 			if (i->Collision(*y)) {
 				mEnabled = false;
@@ -89,7 +95,8 @@ void CBullet::Collision(CRectangle *i, CRectangle *y) {
 			}
 
 		}
-		if (i->mTag ==  EKEYENEMYBULLET && y->mTag == EPLAYERBULLET) {
+
+		if (i->mTag == EKEYENEMYBULLET && y->mTag == EPLAYER) {
 			if (i->Collision(*y)) {
 				mEnabled = false;
 				return;

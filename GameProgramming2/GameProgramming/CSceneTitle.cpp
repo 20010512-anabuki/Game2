@@ -1,6 +1,8 @@
 #include "CSceneTitle.h"
 #include "CKey.h"
 
+extern int Score;
+
 void CSceneTitle::Init() {
 	//テクスチャファイルを読み込む
 	//フォントの設定
@@ -15,6 +17,7 @@ void CSceneTitle::Update() {
 	CText::DrawString("GAME ", -150, 0, 50, 50);
 	CText::DrawString("Push ENTER Key",
 		-200, -100, 16, 16);
+	Score = 0;
 	if (CKey::Once(VK_RETURN)) {
 		//次のシーンはゲーム
 		mScene = EGAME;

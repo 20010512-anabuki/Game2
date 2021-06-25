@@ -2,6 +2,7 @@
 #include "CKey.h"
 #include "CBullet.h"
 #include "CTexture.h"
+#include "CText.h"
 #define G  1
 #define VJ0 18
 #define ANICNT 30
@@ -109,7 +110,9 @@ void CPlayer::Update() {
 	if (CountItem == 0){
 		mGameclear = true;
 	}
-
+	CText::DrawString("Life", -350, 270, 20, 20);
+	char buf[10];
+	sprintf(buf, "%d", mLife);
 }
 
 void CPlayer::Render() {

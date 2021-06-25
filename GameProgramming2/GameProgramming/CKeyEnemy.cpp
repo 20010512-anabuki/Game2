@@ -56,7 +56,7 @@ void CKeyEnemy::Update() {
     	EBullet->mEnabled = true;
 		EBullet->mTag = EKEYENEMYBULLET;
 		}
-		mFireCount = 150;
+		mFireCount = 100;
 		}
 	mFy = -1;
 	x += mFx;

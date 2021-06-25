@@ -16,7 +16,9 @@
 
 CItem Item();
 int Score = 0;
+
 extern int KeyItem;
+extern int mLife;
 int CountEnemy = 0;
 int CountItem = 0;
 int CountKeyItem = 0;
@@ -257,6 +259,7 @@ void CSceneGame::Update() {
 
 		char buf[10];
 		sprintf(buf, "%d", Score);
+
 		CText::DrawString(buf, -290, 230, 20, 20);
 		if (KeyItem > 0){
 			CText::DrawString("KeyItem", 140, 270, 20, 20);
