@@ -123,7 +123,13 @@ void CPlayer::Render() {
 mAniCnt++;
 mAniCnt %= ANICNT;
 //	CRectangle::Render(Texture, 146 - 16, 146 + 16, 146 + 16, 146 - 16);
-if (mMuteki>=0)
+if (mMuteki >= 0){
+	mMuteki -= 1;
+}
+mMuteki % 150;
+if (mMuteki >= 100){
+	return;
+}
 if (mAniCnt < ANICNT / 2){
 	if (mFx >= 0){
 		CRectangle::Render(Texture, 130, 162, 162, 130);
@@ -214,6 +220,20 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 
 	}
 	else if (ry->mTag == EKEYENEMYBULLET)
+	{
+		int mx, my;
+		if (CRectangle::Collision(ry, &mx, &my)) {
+			if (mLife <= 0){
+				mGameover = true;
+			}
+			else if (mMuteki <= 0){
+				mMuteki = 3 * 60;
+				mLife -= 1;
+			}
+		}
+
+	}
+	else if (ry->mTag == EDAMAGEBLOCK)
 	{
 		int mx, my;
 		if (CRectangle::Collision(ry, &mx, &my)) {

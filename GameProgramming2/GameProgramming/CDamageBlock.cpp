@@ -3,15 +3,17 @@
 #include"CPlayer.h"
 
 extern CTexture Texture;
+
 extern int Score;
 extern int CountKeyItem;
 extern int KeyItem;
+extern int CountKeyBlock;
 
 CDamageBlock::CDamageBlock()
 :mFx(1.0f)
 , mFy(0.0f)
 {
-	mTag = EDAMAGEBLOCK;
+	mTag = EKEYBLOCK;
 	w = 50;
 	h = 50;
 }
@@ -38,6 +40,7 @@ bool CDamageBlock::Collision(CRectangle &r){
 
 				mEnabled = false;
 				Score += 200;
+				CountKeyBlock--;
 				KeyItem--;
 				break;
 			}

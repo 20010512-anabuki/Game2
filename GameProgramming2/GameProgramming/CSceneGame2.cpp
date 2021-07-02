@@ -8,10 +8,11 @@
 #include "CEnemy.h"
 #include "CText.h"
 #include "CItem.h"
-#include"CInvisibleBlock.h"
-#include"CKeyItem.h"
-#include"CKeyBlock.h"
-#include"CBulletEnemy.h"
+#include "CInvisibleBlock.h"
+#include "CKeyItem.h"
+#include "CKeyBlock.h"
+#include "CBulletEnemy.h"
+#include "CDamageBlock.h"
 
 
 CItem Item();
@@ -44,7 +45,7 @@ void CSceneGame2::Init() {
 		{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 0, 0, 0, 8, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 	};
 
@@ -125,6 +126,20 @@ void CSceneGame2::Init() {
 				CInvisibleBlock*InvisibleBlock = new CInvisibleBlock();
 				InvisibleBlock->x = i * 100 - 350;
 				InvisibleBlock->y = j * -100 + 250;
+			}
+
+			else if (map[j][i] == 8) {
+				CMap *Map = new CMap();
+				//ŽlŠpŒ`‚É’l‚ðÝ’è
+				Map->mEnabled = true;
+				Map->x = i * 100 - 350;
+				Map->y = j * -100 + 250;
+				Map->w = 50;
+				Map->h = 50;
+				Map->mTag = CRectangle::E0;
+				CDamageBlock*DamageBlock = new CDamageBlock();
+				DamageBlock->x = i * 100 - 350;
+				DamageBlock->y = j * -100 + 250;
 			}
 
 			else if (map[j][i] == 2) {
