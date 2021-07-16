@@ -107,6 +107,9 @@ void CPlayer::Update() {
 	if (y - h < -300){
 		mGameover = true;
 	}
+	if (mMuteki >= 0){
+		mGameover = false;
+	}
 	if (CountItem == 0){
 		mGameclear = true;
 	}
@@ -123,32 +126,28 @@ void CPlayer::Render() {
 mAniCnt++;
 mAniCnt %= ANICNT;
 //	CRectangle::Render(Texture, 146 - 16, 146 + 16, 146 + 16, 146 - 16);
-if (mMuteki >= 0){
-	mMuteki -= 1;
-}
-mMuteki % 150;
-if (mMuteki >= 100){
+if (mMuteki % 20 > 10){
 	return;
 }
-if (mAniCnt < ANICNT / 2){
-	if (mFx >= 0){
-		CRectangle::Render(Texture, 130, 162, 162, 130);
+	if (mAniCnt < ANICNT / 2){
+		if (mFx >= 0){
+			CRectangle::Render(Texture, 130, 162, 162, 130);
+		}
+		else
+		{
+			CRectangle::Render(Texture, 162, 130, 162, 130);
+		}
 	}
 	else
 	{
-		CRectangle::Render(Texture, 162, 130, 162, 130);
+		if (mFx >= 0){
+			CRectangle::Render(Texture, 162, 194, 162, 130);
+		}
+		else
+		{
+			CRectangle::Render(Texture, 194, 162, 162, 130);
+		}
 	}
-}
-else
-{
-	if (mFx >= 0){
-		CRectangle::Render(Texture, 162, 194, 162, 130);
-	}
-	else
-	{
-		CRectangle::Render(Texture, 194, 162, 162, 130);
-	}
-}	
 }
 
 
@@ -182,7 +181,7 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 				mGameover = true;
 			}
 			else if (mMuteki <= 0){
-				mMuteki = 3 * 60;
+				mMuteki = 2 * 60;
 				mLife -= 1;
 			}
 		
@@ -197,7 +196,7 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 				mGameover = true;
 			}
 			else if (mMuteki <= 0){
-				mMuteki = 3 * 60;
+				mMuteki = 2 * 60;
 				mLife -= 1;
 			}
 
@@ -213,9 +212,10 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 				mGameover = true;
 			}
 			else if (mMuteki <= 0){
-				mMuteki = 3 * 60;
+				mMuteki = 2 * 60;
 				mLife -= 1;
 			}
+
 		}
 
 	}
@@ -227,7 +227,7 @@ void CPlayer::Collision(CRectangle *ri, CRectangle *ry) {
 				mGameover = true;
 			}
 			else if (mMuteki <= 0){
-				mMuteki = 3 * 60;
+				mMuteki = 2 * 60;
 				mLife -= 1;
 			}
 		}

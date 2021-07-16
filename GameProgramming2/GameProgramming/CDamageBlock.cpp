@@ -13,7 +13,7 @@ CDamageBlock::CDamageBlock()
 :mFx(1.0f)
 , mFy(0.0f)
 {
-	mTag = EKEYBLOCK;
+	mTag = EDAMAGEBLOCK;
 	w = 50;
 	h = 50;
 }

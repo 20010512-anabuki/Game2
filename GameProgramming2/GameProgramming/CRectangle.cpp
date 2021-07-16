@@ -47,7 +47,7 @@ bool CRectangle::Collision(const CRectangle &r) {
 	//距離の絶対値を求める
 	lenX = lenX < 0 ? -lenX : lenX;
 	//距離が幅の合計より大きいとき、X軸は重なっていない
-	if (lenX > w + r.w) {
+	if (lenX >= w + r.w) {
 		//重なってなければ、衝突していない
 		//falseを返す
 		return false;
@@ -59,7 +59,7 @@ bool CRectangle::Collision(const CRectangle &r) {
 	//距離の絶対値を求める
 	lenY = lenY < 0 ? -lenY : lenY;
 	//距離が幅の合計より大きいとき、Y軸は重なっていない
-	if (lenY > h + r.h) {
+	if (lenY >= h + r.h) {
 		//重なってなければ、衝突していない
 		//falseを返す
 		return false;
