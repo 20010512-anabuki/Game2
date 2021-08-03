@@ -11,12 +11,14 @@
 #include "CInvisibleBlock.h"
 #include "CKeyItem.h"
 #include "CKeyBlock.h"
+#include "CKeyEnemy.h"
 #include "CBulletEnemy.h"
 #include "CDamageBlock.h"
 
 
 CItem Item();
 extern int Score;
+extern int mLife;
 extern int CountEnemy;
 extern int CountItem;
 extern int CountKeyItem;
@@ -42,11 +44,11 @@ void CSceneGame2::Init() {
 	int map[6][62] =
 	{
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 0, 0, 0, 0, 0, 4, 2, 4, 7, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 9, 4, 0, 1, 1, 1, 1, 0, 0, 0, 4, 2, 4, 1, 1, 1, 0, 0, 0, 3, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 0, 0, 0, 0, 1, 3, 1, 3, 1, 3, 1, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 6, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 3, 3, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 3, 9, 4, 0, 1, 1, 0, 3, 0, 7, 4, 0, 0, 0, 1, 5, 3, 3, 3, 0, 0, 6, 6, 6, 0, 1, 0, 0, 1, 0, 0, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1 },
+		{ 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 	};
 
 	for (int j = 0; j < 6; j++) {
@@ -128,19 +130,38 @@ void CSceneGame2::Init() {
 				InvisibleBlock->y = j * -100 + 250;
 			}
 
-			//else if (map[j][i] == 8) {
-				//CMap *Map = new CMap();
+			else if (map[j][i] == 8) {
+				CMap *Map = new CMap();
 				//四角形に値を設定
-				//Map->mEnabled = true;
-				//Map->x = i * 100 - 350;
-				//Map->y = j * -100 + 250;
-				//Map->w = 50;
-				//Map->h = 50;
-				//Map->mTag = CRectangle::E0;
-				//CDamageBlock*DamageBlock = new CDamageBlock();
-				//DamageBlock->x = i * 100 - 350;
-				//DamageBlock->y = j * -100 + 250;
-			//}
+				Map->mEnabled = true;
+				Map->x = i * 100 - 350;
+				Map->y = j * -100 + 250;
+				Map->w = 50;
+				Map->h = 50;
+				Map->mTag = CRectangle::E0;
+				CDamageBlock*DamageBlock = new CDamageBlock();
+				DamageBlock->x = i * 100 - 350;
+				DamageBlock->y = j * -100 + 250;
+			}
+
+			else if (map[j][i] == 9) {
+				CMap *Map = new CMap();
+				//四角形に値を設定
+				Map->mEnabled = true;
+				Map->x = i * 100 - 350;
+				Map->y = j * -100 + 250;
+				Map->w = 50;
+				Map->h = 50;
+				Map->mTag = CRectangle::E0;
+				CKeyEnemy *BulletEnemy = new CKeyEnemy();
+				BulletEnemy->x = i * 100 - 350;
+				BulletEnemy->y = j * -100 + 250;
+				//右へ移動
+				BulletEnemy->mFx = 1;
+				BulletEnemy->mFy = 0;
+				CountEnemy++;
+
+			}
 
 			else if (map[j][i] == 2) {
 				CMap *Map = new CMap();
@@ -264,6 +285,11 @@ void CSceneGame2::Update() {
 		sprintf(buf, "%d", KeyItem);
 		CText::DrawString(buf, 290, 230, 20, 20);
 	}
+	CText::DrawString("Life", -50, 270, 20, 20);
+	if (mLife > 0){
+		sprintf(buf, "%d", mLife);
+		CText::DrawString(buf, 0, 230, 20, 20);
+	}
 
 
 	if (CPlayer::spInstance->mGameover){
@@ -271,12 +297,14 @@ void CSceneGame2::Update() {
 		CountItem = 0;
 		CountKeyItem = 0;
 		KeyItem = 0;
+		mLife = 0;
 		CText::DrawString("GameOver", -270, 50, 40, 40);
 		CText::DrawString("Push ENTER Key", -200, -100, 16, 16);
 		if (CKey::Once(VK_RETURN)) {
 			//次のシーンはゲーム
 			mScene = EGAME;
 			Score = 0;
+			mLife = 2;
 		}
 	}
 	if (CPlayer::spInstance->mGameclear){
@@ -284,6 +312,7 @@ void CSceneGame2::Update() {
 		CountItem = 0;
 		CountKeyItem = 0;
 		KeyItem = 0;
+		mLife = 2;
 		CText::DrawString("GameClear", -300, 40, 40, 40);
 		CText::DrawString("Push ENTER Key", -200, -100, 16, 16);
 

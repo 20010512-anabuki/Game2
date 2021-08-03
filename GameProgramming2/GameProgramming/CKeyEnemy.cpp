@@ -14,7 +14,7 @@ extern int KeyItem;
 CKeyEnemy::CKeyEnemy()
 : mFx(1.0f)
 , mFy(0.0f)
-, mLife(2)
+, mEKLife(2)
 , mFireCount(60)
 {
 	mTag = EKEYENEMY;
@@ -132,15 +132,15 @@ bool CKeyEnemy::Collision(CRectangle &r) {
 
 		case EPLAYERBULLET:
 			//プレイヤーに当たると、無効にする
-			if (mLife <= 0){
+			if (mEKLife <= 0){
 				mEnabled = false;
 				Score += 400;
 				CountEnemy--;
 				KeyItem++;
 				break;
 			}
-			else if (mLife > 0){
-				mLife -= 1;
+			else if (mEKLife > 0){
+				mEKLife -= 1;
 			}
 		
 			//case EPLAYER:

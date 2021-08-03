@@ -13,7 +13,6 @@ public:
 	int mVj;
 	int FireCount;
 	int mAniCnt;
-	int mLife;
 	int mMuteki;
 	CPlayer();
 	static CPlayer*spInstance;

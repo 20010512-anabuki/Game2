@@ -15,6 +15,7 @@ extern int CountEnemy;
 extern int CountItem;
 extern int CountKeyBlock;
 extern int CountKeyItem;
+int mLife = 2;
 
 CPlayer*CPlayer::spInstance = 0;
 CPlayer::CPlayer()
@@ -22,7 +23,6 @@ CPlayer::CPlayer()
 , FireCount(0)
 , mVj(0)
 , mJump(0)
-, mLife(2)
 , mMuteki(0)
 , mGameover(false)
 , mGameclear(false)
@@ -107,15 +107,15 @@ void CPlayer::Update() {
 	if (y - h < -300){
 		mGameover = true;
 	}
-	if (mMuteki >= 0){
+	else if (mMuteki >= 0){
 		mGameover = false;
 	}
 	if (CountItem == 0){
 		mGameclear = true;
 	}
-	CText::DrawString("Life", -350, 270, 20, 20);
-	char buf[10];
-	sprintf(buf, "%d", mLife);
+	//CText::DrawString("Life", -350, 270, 20, 20);
+	//char buf[10];
+	//sprintf(buf, "%d", mLife);
 }
 
 void CPlayer::Render() {

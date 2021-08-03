@@ -10,7 +10,6 @@ public:
 	CDamageBlock();
 	bool Collision(CRectangle &r);
 	void Collision(CRectangle *i, CRectangle *y);
-	void Update();
 	void Render();
 };
 
